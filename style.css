@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: min(240px, 100%) 1fr;
+    grid-template-areas: 
+    "sidebar navbar"
+    "sidebar main";
+    transition: all 150ms ease;
+}
+
+.wrapper.resize {
+    grid-template-columns: min(60px, 100%) 1fr;    
+}
+
+nav {
+    grid-area: navbar;
+    position: sticky;
+    top: 0;
+    height: 5em;
+    background-color: #0000ff;
+    color: white;
+}
+
+aside {
+    grid-area: sidebar;
+    position: sticky;
+    align-self: start;
+    top: 0;
+    height: 100vh;
+    background-color: grey;
+    transition: all 150ms ease;
+}
+
+main {
+    grid-area: main;
+    background-color: blueviolet;
+}
+
+/* smartphone size */
+@media(max-width: 400px) { 
+    .wrapper {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "navbar"
+        "main";
+    }
+    
+    .wrapper.resize {
+        grid-template-columns: 1fr;    
+    }
+
+    #overlay {
+        background-color: rgba(255, 0, 0, 0.288);
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        transition: all 150ms ease;
+
+        /* method 1: with transition*/
+        top: 0;
+        /* left: -100%; */
+        
+        /* method 2: without transition */
+        display: none;
+    }
+    
+    #overlay.show {
+        /* method 1: with transition */
+        /* left: 0; */
+        
+        /* method 2: without transition */
+        display: block;
+    }
+    
+    aside {
+        position: fixed;
+        width: min(240px, 100%);
+        
+        /* method 1: with transition */
+        top: 0;
+        left: -100%;
+        
+        /* method 2: without transition */
+        /* display: none; */
+    }
+    
+    aside.show {
+        /* method 1: with transition */
+        left: 0%;
+
+        /* method 2: without transition */
+        /* display: block; */
+    }
+}
